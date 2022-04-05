@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% load filters %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="title"> {{ title }}</h1>
+    <form action="{% url 'save' %}" method="post">
+                {% csrf_token %}
+                <label for="title">Titulo:</label>
+                <input type="text" name="title" placeholder="Introduce el título">
+                <label for="mail">Contenido:</label>
+                <textarea name="content"></textarea>
+                <label for="public">¿Publicado?:</label>
+                <select name='public'>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
+
+                <button type="submit">Guardar</button>
+
+    </form>
+
+
+    <p>
+    <ul>
+        {% for articulo in articulos %}
+            <li>
+                <h3>{{ articulo.id }}.- {{ articulo.title }}</h3>
+                <span><strong>Fecha Creación:</strong> {{ articulo.created_at }}</span>
+                <br>
+                {% if articulo.public %}
+                    <strong>Publicado</strong>
+                {% else %}
+                    <strong>Privado</strong>
+                {% endif %}
+                <p>{{ articulo.content }}</p>
+                <a href="{% url 'borrar' articulo.id %}">Borrar</a>
+                <br>
+            </li>
+        {% endfor %}
+    </ul>
+    </p>
+
+
+
+{% endblock %}

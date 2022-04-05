@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load filters %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="title"> {{ title }}</h1>
+
+    {% if form.errors %}
+        <strong class="rojoerror">
+            Hay errores en el formulario.
+        </strong>
+    {% endif %}
+    <form action="" method="post">
+                {% csrf_token %}
+
+                {{ form }}
+
+                <input type="submit" value="Guardar"/>
+
+    </form>
+
+
+
+
+{% endblock %}
