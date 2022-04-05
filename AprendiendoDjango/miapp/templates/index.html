@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+
+
+    {% comment 'Nota para el comentario'%}
+<h1> hola</h1>
+{% endcomment %}
+
+
+    <h1 class="title"> {{ title }} </h1>
+
+    <p>{{ mi_variable }}</p>
+
+    {% if nombre and nombre == 'Marco Rodriguez' %}
+        <p>{{ nombre }}</p>
+    {% else %}
+        <strong>El nombre no existe o no coincide</strong>
+    {% endif %}
+
+    <h3>Listado de lenguajes de programacion</h3>
+    <ul>
+        {% for lenguaje in lenguajes %}
+            <li>{{ forloop.counter }}. {{ lenguaje }}</li>
+        {% empty %}
+            <p>No hay lenguajes que mostrar!</p>
+        {% endfor %}
+    </ul>
+    {% include 'fecha_actual.html' %}
+    <p>Años hasta el 2050:</p>
+    <ul>
+        {% for year in years %}
+            {% if year|divisibleby:2 %}
+
+                <li>{{ year }}</li>
+
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

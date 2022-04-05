@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            <!-- titulo de cada pagina -->
+        {% endblock %}
+        | Marco Rodriguez
+    </title>
+
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!-- Cabecera de la pagina -->
+<header>
+    <div id="logotipo">
+        <!-- LOgo django -->
+        <img src="{% static 'images/logo.png' %}"/>
+        <h1>Sitio web de Marco hecho con Django</h1>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        <li><a href="{% url 'articulos' %}">Articulos</a></li>
+        <li><a href="{% url 'create_full' %}">Crear Articulo</a></li>
+        <li><a href="{% url 'hola_mundo' %}">Hola mundo</a></li>
+        <li><a href="{% url 'pagina' %}">Página de pruebas</a></li>
+        <li><a href="{% url 'contacto' %}">Contacto</a></li>
+    </ul>
+</nav>
+
+<div class="barra">
+    <span class="esquina-izquierda"></span>
+    <span class="relleno-barra"></span>
+    <span class="esquina-derecha"></span>
+</div>
+
+<div id="content">
+    <div class="box">
+        {% block content %}
+            <!-- codigo que viene de las templates
+            podemos poner un texto que se mostrará en todas las paginas -->
+            <h1>Esto aparecera en todas las paginas</h1>
+        {% endblock %}
+    </div>
+</div>
+
+<footer>
+    Master en Python &copy; Marco Rodriguez - {% now "Y" %}
+</footer>
+</body>
+</html>

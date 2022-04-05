@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            <!-- titulo de cada pagina -->
+        {% endblock %}
+        | Marco Rodriguez
+    </title>
+
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!-- Cabecera de la pagina -->
+<header>
+    <div id="logotipo">
+        <!-- LOgo django -->
+        <img src="{% static 'images/logo.png' %}"/>
+        <h1>Proyecto hecho con Django</h1>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="{% url 'index' %}">Inicio</a></li>
+        {% if user.email %}
+            <li>
+                <a href="{% url 'list_articles' %}">Categorías</a>
+                <ul>
+                    {% for category in categories %}
+                        <li><a href="{% url 'category' category.0 %}">{{ category.1 }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% for page in pages %}
+                <li><a href="{% url 'page' page.2 %}">{{ page.1 }}</a></li>
+            {% endfor %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+        {% else %}
+            <li><a href="{% url 'register' %}">Registro</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<div class="barra">
+    <span class="esquina-izquierda"></span>
+    <span class="relleno-barra"></span>
+    <span class="esquina-derecha"></span>
+</div>
+
+<div id="content">
+    <div class="box">
+        {% block content %}
+
+            <!-- codigo que viene de las templates
+            podemos poner un texto que se mostrará en todas las paginas -->
+            <h1>Esto aparecera en todas las paginas</h1>
+        {% endblock %}
+    </div>
+</div>
+
+<footer>
+    Proyecto Django &copy; Marco Rodriguez - {% now "Y" %}
+</footer>
+</body>
+</html>

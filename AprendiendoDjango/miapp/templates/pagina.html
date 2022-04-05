@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load filters %}
+{% block title %}
+ {{ title }}
+{% endblock %}
+
+
+{% block content %}
+<h1 class="title"> Página de mi web </h1>
+<p>
+    Esto es un parrafo hecho por Marco
+</p>
+
+{{ "Marco Rodriguez"|saludo|safe }}
+
+{% endblock %}
